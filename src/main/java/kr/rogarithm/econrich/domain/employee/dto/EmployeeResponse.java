@@ -1,11 +1,13 @@
 package kr.rogarithm.econrich.domain.employee.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
+@Getter
 public class EmployeeResponse {
 
     private Long id;
@@ -13,7 +15,7 @@ public class EmployeeResponse {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private LocalDateTime hireDate;
+    private LocalDate hireDate;
     private String jobId;
     private BigDecimal salary;
     private BigDecimal commissionPct;
