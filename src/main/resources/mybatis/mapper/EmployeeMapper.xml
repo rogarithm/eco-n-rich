@@ -8,10 +8,10 @@
   <select id="selectEmployeeById" parameterType="Long"
     resultType="kr.rogarithm.econrich.domain.employee.domain.Employee">
     SELECT
-    id, firstName, lastName, email, phoneNumber, hireDate,
-    jobId, salary, commissionPct, managerId, departmentId
+    employee_id, first_name, last_name, email, phone_number, hire_date,
+    job_id, salary, commission_pct, manager_id, department_id
     FROM employees
-    WHERE ID = #{id}
+    WHERE employee_id = #{employeeId}
   </select>
 
 </mapper>
