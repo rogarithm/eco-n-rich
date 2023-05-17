@@ -2,6 +2,7 @@ package kr.rogarithm.econrich.domain.employee.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,4 +55,18 @@ class EmployeeServiceTest {
         assertEquals(id, employeeResponse.getId());
     }
 
+    @Test
+    public void invalidIdShouldThrowException() {
+
+        // given
+        Long id = -1L;
+
+        // when
+        when(employeeMapper.selectEmployeeById(id))
+                .thenReturn(null);
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> employeeService.getEmployeeById(id));
+        verify(employeeMapper).selectEmployeeById(id);
+    }
 }

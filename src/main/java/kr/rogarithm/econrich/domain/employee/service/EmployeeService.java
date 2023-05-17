@@ -16,6 +16,11 @@ public class EmployeeService {
 
     public EmployeeResponse getEmployeeById(Long employeeId) {
         Employee employee = employeeMapper.selectEmployeeById(employeeId);
+
+        if (employee == null) {
+            throw new IllegalArgumentException("입력한 아이디 " + employeeId + "에 해당하는 직원 정보를 찾을 수 없습니다");
+        }
+
         return EmployeeResponse.of(employee);
     }
 }
