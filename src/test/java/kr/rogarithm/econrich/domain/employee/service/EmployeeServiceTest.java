@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.employee.dao.EmployeeMapper;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,10 +44,9 @@ class EmployeeServiceTest {
                                     .departmentId(90L)
                                     .build();
 
+        // when
         when(employeeMapper.selectEmployeeById(id))
                 .thenReturn(employee);
-
-        // when
         EmployeeResponse employeeResponse = employeeService.getEmployeeById(id);
 
         // then
@@ -66,7 +66,7 @@ class EmployeeServiceTest {
                 .thenReturn(null);
 
         // then
-        assertThrows(IllegalArgumentException.class, () -> employeeService.getEmployeeById(id));
+        assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployeeById(id));
         verify(employeeMapper).selectEmployeeById(id);
     }
 }
