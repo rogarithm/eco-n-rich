@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -29,6 +30,20 @@ class EmployeeControllerTest {
 
     @MockBean
     EmployeeService employeeService;
+
+    @Test
+    public void getEmployyeWithInvalidId() throws Exception {
+        Long id = -1L;
+
+        when(employeeService.getEmployeeById(id)).thenThrow(EmployeeNotFoundException.class);
+
+        this.mockMvc
+                .perform(get("/employees/{employeeId}", id))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(employeeService).getEmployeeById(id);
+    }
 
     @Test
     public void getEmployeeWithValidId() throws Exception {
