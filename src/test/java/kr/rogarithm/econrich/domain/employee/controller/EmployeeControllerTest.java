@@ -48,6 +48,7 @@ class EmployeeControllerTest {
     @Test
     public void getEmployeeWithValidId() throws Exception {
         Long id = 100L;
+
         Employee employee = Employee.builder()
                                     .id(100L)
                                     .firstName("Steven")
