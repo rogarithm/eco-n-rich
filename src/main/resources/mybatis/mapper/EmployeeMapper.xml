@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.rogarithm.econrich.domain.employee.dao.EmployeeMapper">
+
+  <select id="selectEmployeeById" parameterType="Long"
+    resultType="kr.rogarithm.econrich.domain.employee.domain.Employee">
+    SELECT
+    employee_id, first_name, last_name, email, phone_number, hire_date,
+    job_id, salary, commission_pct, manager_id, department_id
+    FROM employees
+    WHERE employee_id = #{employeeId}
+  </select>
+
+</mapper>
