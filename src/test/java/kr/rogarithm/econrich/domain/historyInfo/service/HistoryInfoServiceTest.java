@@ -27,6 +27,7 @@ class HistoryInfoServiceTest {
     @Test
     public void validIdShouldGetJobHistory() {
 
+        // given
         Long id = 101L;
         JobHistory jobHistory = JobHistory.builder()
                                           .id(101L)
@@ -36,10 +37,12 @@ class HistoryInfoServiceTest {
                                           .departmentId(110L)
                                           .build();
 
+        // when
         when(historyInfoMapper.selectJobHistoryById(id))
                 .thenReturn(jobHistory);
         JobHistoryResponse jobHistoryResponse = historyInfoService.getJobHistoryById(id);
 
+        // then
         verify(historyInfoMapper).selectJobHistoryById(id);
         assertNotNull(jobHistoryResponse);
         assertEquals(id, jobHistoryResponse.getId());
