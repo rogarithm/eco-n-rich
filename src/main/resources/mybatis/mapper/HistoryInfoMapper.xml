@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.rogarithm.econrich.domain.historyInfo.dao.HistoryInfoMapper">
+
+  <select id="selectJobHistoryById" parameterType="Long"
+    resultType="kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory">
+    SELECT
+    employee_id, start_date, end_date, job_id, department_id
+    FROM job_history
+    WHERE employee_id = #{employeeId}
+  </select>
+
+</mapper>
