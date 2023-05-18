@@ -2,6 +2,7 @@ package kr.rogarithm.econrich.domain.historyInfo.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.historyInfo.dao.HistoryInfoMapper;
 import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
 import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
+import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,4 +50,18 @@ class HistoryInfoServiceTest {
         assertEquals(id, jobHistoryResponse.getId());
     }
 
+    @Test
+    public void invalidIdShouldThrowException() {
+
+        // given
+        Long id = -1L;
+
+        // when
+        when(historyInfoMapper.selectJobHistoryById(id))
+                .thenReturn(null);
+
+        // then
+        assertThrows(JobHistoryNotFoundException.class, () -> historyInfoService.getJobHistoryById(id));
+        verify(historyInfoMapper).selectJobHistoryById(id);
+    }
 }
