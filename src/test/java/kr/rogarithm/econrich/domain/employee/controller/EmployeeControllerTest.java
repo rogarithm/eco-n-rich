@@ -8,10 +8,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import kr.rogarithm.econrich.domain.employee.domain.Department;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
+import kr.rogarithm.econrich.domain.employee.domain.Location;
+import kr.rogarithm.econrich.domain.employee.dto.DepartmentResponse;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
 import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
+import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
@@ -107,6 +111,50 @@ class EmployeeControllerTest {
                 .andExpect(status().isOk());
 
         verify(employeeService).getJobHistoryById(id);
+    }
+
+    @Test
+    public void getDepartmentAndLocationWithInvalidId() throws Exception {
+        Long id = -1L;
+
+        when(employeeService.getDepartmentById(id)).thenThrow(DepartmentNotFoundException.class);
+
+        this.mockMvc
+                .perform(get("/employees/{employeeId}/department", id))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(employeeService).getDepartmentById(id);
+    }
+
+    @Test
+    public void getDepartmentAndLocationWithValidId() throws Exception {
+        Long employeeId = 201L;
+        Long departmentId = 20L;
+        Long locationId = 1800L;
+        Department department = Department.builder()
+                                          .id(departmentId)
+                                          .departmentName("Marketing")
+                                          .managerId(201L)
+                                          .locationId(1800L)
+                                          .build();
+        Location location = Location.builder()
+                                    .id(locationId)
+                                    .streetAddress("147 Spadina Ave")
+                                    .postalCode("M5V 2L7")
+                                    .city("Toronto")
+                                    .stateProvince("Ontario")
+                                    .countryId("CA")
+                                    .build();
+
+        when(employeeService.getDepartmentById(employeeId)).thenReturn(DepartmentResponse.of(department, location));
+
+        this.mockMvc
+                .perform(get("/employees/{employeeId}/department", employeeId))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        verify(employeeService).getDepartmentById(employeeId);
     }
 
 }

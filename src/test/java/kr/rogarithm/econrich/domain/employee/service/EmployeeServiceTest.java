@@ -9,10 +9,14 @@ import static org.mockito.Mockito.when;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.employee.dao.EmployeeMapper;
+import kr.rogarithm.econrich.domain.employee.domain.Department;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
+import kr.rogarithm.econrich.domain.employee.domain.Location;
+import kr.rogarithm.econrich.domain.employee.dto.DepartmentResponse;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
 import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
+import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
 import org.junit.jupiter.api.Test;
@@ -32,7 +36,6 @@ class EmployeeServiceTest {
 
     @Test
     public void validIdShouldGetEmployeeInfo() {
-
         // given
         Long id = 100L;
         Employee employee = Employee.builder()
@@ -60,7 +63,6 @@ class EmployeeServiceTest {
 
     @Test
     public void invalidIdShouldThrowEmployeeNotFoundException() {
-
         // given
         Long id = -1L;
 
@@ -75,7 +77,6 @@ class EmployeeServiceTest {
 
     @Test
     public void validIdShouldGetJobHistory() {
-
         // given
         Long id = 101L;
         JobHistory jobHistory = JobHistory.builder()
@@ -99,7 +100,6 @@ class EmployeeServiceTest {
 
     @Test
     public void invalidIdShouldThrowJobHistoryNotFoundException() {
-
         // given
         Long id = -1L;
 
@@ -110,5 +110,53 @@ class EmployeeServiceTest {
         // then
         assertThrows(JobHistoryNotFoundException.class, () -> employeeService.getJobHistoryById(id));
         verify(employeeMapper).selectJobHistoryById(id);
+    }
+
+    @Test
+    public void invalidIdShouldThrowDepartmentNotFoundException() {
+        // given
+        Long id = -1L;
+
+        // when
+        when(employeeMapper.selectDepartmentById(id))
+                .thenReturn(null);
+
+        // then
+        assertThrows(DepartmentNotFoundException.class, () -> employeeService.getDepartmentById(id));
+        verify(employeeMapper).selectDepartmentById(id);
+    }
+
+
+    @Test
+    public void validIdShouldGetDepartmentAndLocation() {
+        // given
+        Long employeeId = 201L;
+        Long departmentId = 20L;
+        Long locationId = 1800L;
+        Department department = Department.builder()
+                                          .id(departmentId)
+                                          .departmentName("Marketing")
+                                          .managerId(201L)
+                                          .locationId(1800L)
+                                          .build();
+        Location location = Location.builder()
+                                    .id(locationId)
+                                    .streetAddress("147 Spadina Ave")
+                                    .postalCode("M5V 2L7")
+                                    .city("Toronto")
+                                    .stateProvince("Ontario")
+                                    .countryId("CA")
+                                    .build();
+
+        // when
+        when(employeeMapper.selectDepartmentById(employeeId)).thenReturn(department);
+        when(employeeMapper.selectLocationById(employeeId)).thenReturn(location);
+        DepartmentResponse departmentAndLocation = employeeService.getDepartmentById(employeeId);
+
+        // then
+        verify(employeeMapper).selectDepartmentById(employeeId);
+        verify(employeeMapper).selectLocationById(employeeId);
+        assertNotNull(departmentAndLocation);
+        assertEquals(departmentId, departmentAndLocation.getId());
     }
 }
