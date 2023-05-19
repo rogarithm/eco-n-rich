@@ -136,15 +136,17 @@ class EmployeeServiceTest {
     public void validIdShouldGetDepartmentAndLocation() {
 
         // given
-        Long id = 201L;
+        Long employeeId = 201L;
+        Long departmentId = 20L;
+        Long locationId = 1800L;
         Department department = Department.builder()
-                                          .id(20L)
+                                          .id(departmentId)
                                           .departmentName("Marketing")
                                           .managerId(201L)
                                           .locationId(1800L)
                                           .build();
         Location location = Location.builder()
-                                    .id(1800L)
+                                    .id(locationId)
                                     .streetAddress("147 Spadina Ave")
                                     .postalCode("M5V 2L7")
                                     .city("Toronto")
@@ -153,14 +155,14 @@ class EmployeeServiceTest {
                                     .build();
 
         // when
-        when(employeeMapper.selectDepartmentById(id)).thenReturn(department);
-        when(employeeMapper.selectLocationById(id)).thenReturn(location);
-        DepartmentResponse departmentAndLocation = employeeService.getDepartmentById(id);
+        when(employeeMapper.selectDepartmentById(employeeId)).thenReturn(department);
+        when(employeeMapper.selectLocationById(employeeId)).thenReturn(location);
+        DepartmentResponse departmentAndLocation = employeeService.getDepartmentById(employeeId);
 
         // then
-        verify(employeeMapper).selectDepartmentById(id);
-        verify(employeeMapper).selectLocationById(id);
+        verify(employeeMapper).selectDepartmentById(employeeId);
+        verify(employeeMapper).selectLocationById(employeeId);
         assertNotNull(departmentAndLocation);
-        assertEquals(id, departmentAndLocation.getId());
+        assertEquals(departmentId, departmentAndLocation.getId());
     }
 }
