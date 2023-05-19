@@ -2,11 +2,11 @@ package kr.rogarithm.econrich.domain.employee.service;
 
 import kr.rogarithm.econrich.domain.employee.dao.EmployeeMapper;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
+import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
-import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
-import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
-import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
+import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

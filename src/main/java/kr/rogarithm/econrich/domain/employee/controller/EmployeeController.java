@@ -1,8 +1,8 @@
 package kr.rogarithm.econrich.domain.employee.controller;
 
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
-import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

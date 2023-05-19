@@ -1,4 +1,4 @@
-package kr.rogarithm.econrich.domain.historyInfo.domain;
+package kr.rogarithm.econrich.domain.employee.domain;
 
 import java.time.LocalDate;
 import lombok.Builder;

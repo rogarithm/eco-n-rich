@@ -9,12 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
+import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
+import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
-import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
-import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
-import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;

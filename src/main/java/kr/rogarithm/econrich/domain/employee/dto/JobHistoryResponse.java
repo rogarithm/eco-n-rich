@@ -1,7 +1,7 @@
-package kr.rogarithm.econrich.domain.historyInfo.dto;
+package kr.rogarithm.econrich.domain.employee.dto;
 
 import java.time.LocalDate;
-import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
+import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import lombok.Builder;
 import lombok.Getter;
 

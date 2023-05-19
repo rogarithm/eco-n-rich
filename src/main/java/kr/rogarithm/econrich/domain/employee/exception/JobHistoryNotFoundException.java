@@ -1,4 +1,4 @@
-package kr.rogarithm.econrich.domain.historyInfo.exception;
+package kr.rogarithm.econrich.domain.employee.exception;
 
 public class JobHistoryNotFoundException extends RuntimeException {
 
