@@ -14,4 +14,12 @@
     WHERE employee_id = #{employeeId}
   </select>
 
+  <select id="selectJobHistoryById" parameterType="Long"
+    resultType="kr.rogarithm.econrich.domain.employee.domain.JobHistory">
+    SELECT
+    employee_id, start_date, end_date, job_id, department_id
+    FROM job_history
+    WHERE employee_id = #{employeeId}
+  </select>
+
 </mapper>

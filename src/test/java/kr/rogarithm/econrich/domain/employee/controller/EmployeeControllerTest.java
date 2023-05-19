@@ -9,8 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
+import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
+import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -32,7 +35,7 @@ class EmployeeControllerTest {
     EmployeeService employeeService;
 
     @Test
-    public void getEmployyeWithInvalidId() throws Exception {
+    public void getEmployeeWithInvalidId() throws Exception {
         Long id = -1L;
 
         when(employeeService.getEmployeeById(id)).thenThrow(EmployeeNotFoundException.class);
@@ -70,4 +73,40 @@ class EmployeeControllerTest {
 
         verify(employeeService).getEmployeeById(id);
     }
+
+    @Test
+    public void getJobHistoryWithInvalidId() throws Exception {
+        Long id = -1L;
+
+        when(employeeService.getJobHistoryById(id)).thenThrow(JobHistoryNotFoundException.class);
+
+        this.mockMvc
+                .perform(get("/employees/{employeeId}/history", id))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(employeeService).getJobHistoryById(id);
+    }
+
+    @Test
+    public void getJobHistoryWithValidId() throws Exception {
+        Long id = 101L;
+        JobHistory jobHistory = JobHistory.builder()
+                                          .id(101L)
+                                          .startDate(LocalDate.parse("1989-09-21"))
+                                          .endDate(LocalDate.parse("1993-10-27"))
+                                          .jobId("AC_ACCOUNT")
+                                          .departmentId(110L)
+                                          .build();
+
+        when(employeeService.getJobHistoryById(id)).thenReturn(JobHistoryResponse.of(jobHistory));
+
+        this.mockMvc
+                .perform(get("/employees/{employeeId}/history", id))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        verify(employeeService).getJobHistoryById(id);
+    }
+
 }

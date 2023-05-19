@@ -1,6 +1,7 @@
 package kr.rogarithm.econrich.domain.employee.controller;
 
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
+import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +23,12 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponse> getEmployee(@PathVariable Long employeeId) {
         EmployeeResponse employeeResponse = employeeService.getEmployeeById(employeeId);
         return ResponseEntity.ok().body(employeeResponse);
+    }
+
+    @GetMapping("/{employeeId}/history")
+    public ResponseEntity<JobHistoryResponse> getHistory(@PathVariable Long employeeId) {
+
+        JobHistoryResponse jobHistory = employeeService.getJobHistoryById(employeeId);
+        return ResponseEntity.ok().body(jobHistory);
     }
 }

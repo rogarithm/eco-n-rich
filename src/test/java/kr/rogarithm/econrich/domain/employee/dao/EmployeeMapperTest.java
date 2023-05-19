@@ -3,6 +3,7 @@ package kr.rogarithm.econrich.domain.employee.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
+import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,13 @@ class EmployeeMapperTest {
     EmployeeMapper employeeMapper;
 
     @Test
+    public void selectEmployeeByInvalidId() {
+        Employee employee = employeeMapper.selectEmployeeById(-1L);
+
+        assertEquals(null, employee);
+    }
+
+    @Test
     public void selectEmployeeByValidId() {
         Employee employee = employeeMapper.selectEmployeeById(100L);
 
@@ -21,10 +29,16 @@ class EmployeeMapperTest {
     }
 
     @Test
-    public void selectEmployeeByInvalidId() {
-        Employee employee = employeeMapper.selectEmployeeById(-1L);
+    public void selectJobHistoryByInvalidId() {
+        JobHistory jobHistory = employeeMapper.selectJobHistoryById(-1L);
 
-        assertEquals(null, employee);
+        assertEquals(null, jobHistory);
     }
 
+    @Test
+    public void selectJobHistoryByValidId() {
+        JobHistory jobHistory = employeeMapper.selectJobHistoryById(102L);
+
+        assertEquals(102L, jobHistory.getId());
+    }
 }
