@@ -12,7 +12,6 @@ import kr.rogarithm.econrich.domain.employee.dao.EmployeeMapper;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
-import kr.rogarithm.econrich.domain.historyInfo.dao.HistoryInfoMapper;
 import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
 import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
@@ -30,9 +29,6 @@ class EmployeeServiceTest {
 
     @Mock
     EmployeeMapper employeeMapper;
-
-    @Mock
-    HistoryInfoMapper historyInfoMapper;
 
     @Test
     public void validIdShouldGetEmployeeInfo() {
@@ -91,12 +87,12 @@ class EmployeeServiceTest {
                                           .build();
 
         // when
-        when(historyInfoMapper.selectJobHistoryById(id))
+        when(employeeMapper.selectJobHistoryById(id))
                 .thenReturn(jobHistory);
         JobHistoryResponse jobHistoryResponse = employeeService.getJobHistoryById(id);
 
         // then
-        verify(historyInfoMapper).selectJobHistoryById(id);
+        verify(employeeMapper).selectJobHistoryById(id);
         assertNotNull(jobHistoryResponse);
         assertEquals(id, jobHistoryResponse.getId());
     }
@@ -108,11 +104,11 @@ class EmployeeServiceTest {
         Long id = -1L;
 
         // when
-        when(historyInfoMapper.selectJobHistoryById(id))
+        when(employeeMapper.selectJobHistoryById(id))
                 .thenReturn(null);
 
         // then
         assertThrows(JobHistoryNotFoundException.class, () -> employeeService.getJobHistoryById(id));
-        verify(historyInfoMapper).selectJobHistoryById(id);
+        verify(employeeMapper).selectJobHistoryById(id);
     }
 }

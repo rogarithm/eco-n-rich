@@ -4,7 +4,6 @@ import kr.rogarithm.econrich.domain.employee.dao.EmployeeMapper;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
-import kr.rogarithm.econrich.domain.historyInfo.dao.HistoryInfoMapper;
 import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
 import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
@@ -14,11 +13,9 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     private final EmployeeMapper employeeMapper;
-    private final HistoryInfoMapper historyInfoMapper;
 
-    public EmployeeService(EmployeeMapper employeeMapper, HistoryInfoMapper historyInfoMapper) {
+    public EmployeeService(EmployeeMapper employeeMapper) {
         this.employeeMapper = employeeMapper;
-        this.historyInfoMapper = historyInfoMapper;
     }
 
     public EmployeeResponse getEmployeeById(Long employeeId) {
@@ -32,7 +29,7 @@ public class EmployeeService {
     }
 
     public JobHistoryResponse getJobHistoryById(Long employeeId) {
-        JobHistory jobHistory = historyInfoMapper.selectJobHistoryById(employeeId);
+        JobHistory jobHistory = employeeMapper.selectJobHistoryById(employeeId);
 
         if (jobHistory == null) {
             throw new JobHistoryNotFoundException("입력한 아이디 " + employeeId + "에 해당하는 직원 이력을 찾을 수 없습니다");
