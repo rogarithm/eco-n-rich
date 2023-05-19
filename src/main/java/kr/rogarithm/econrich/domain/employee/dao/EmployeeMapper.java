@@ -15,5 +15,5 @@ public interface EmployeeMapper {
 
     Department selectDepartmentById(Long employeeId);
 
-    Location selectLocationById(Long employeeId);
+    Location selectLocationById(Long departmentId);
 }
