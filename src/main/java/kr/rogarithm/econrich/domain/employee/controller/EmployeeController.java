@@ -25,8 +25,8 @@ public class EmployeeController {
         return ResponseEntity.ok().body(employeeResponse);
     }
 
-    @GetMapping("/{employeeId}/historyInfo")
-    public ResponseEntity<JobHistoryResponse> getHistoryInfo(@PathVariable Long employeeId) {
+    @GetMapping("/{employeeId}/history")
+    public ResponseEntity<JobHistoryResponse> getHistory(@PathVariable Long employeeId) {
 
         JobHistoryResponse jobHistory = employeeService.getJobHistoryById(employeeId);
         return ResponseEntity.ok().body(jobHistory);

@@ -81,7 +81,7 @@ class EmployeeControllerTest {
         when(employeeService.getJobHistoryById(id)).thenThrow(JobHistoryNotFoundException.class);
 
         this.mockMvc
-                .perform(get("/employees/{employeeId}/historyInfo", id))
+                .perform(get("/employees/{employeeId}/history", id))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
@@ -102,7 +102,7 @@ class EmployeeControllerTest {
         when(employeeService.getJobHistoryById(id)).thenReturn(JobHistoryResponse.of(jobHistory));
 
         this.mockMvc
-                .perform(get("/employees/{employeeId}/historyInfo", id))
+                .perform(get("/employees/{employeeId}/history", id))
                 .andDo(print())
                 .andExpect(status().isOk());
 
