@@ -52,8 +52,8 @@ class EmployeeMapperTest {
 
     @Test
     public void selectDepartmentByValidId() {
-        Department department = employeeMapper.selectDepartmentById(20L);
+        Department department = employeeMapper.selectDepartmentById(200L);
 
-        assertEquals(20L, department.getId());
+        assertEquals(10L, department.getId());
     }
 }
