@@ -1,5 +1,6 @@
 package kr.rogarithm.econrich.domain.employee.controller;
 
+import kr.rogarithm.econrich.domain.employee.dto.DepartmentResponse;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
 import kr.rogarithm.econrich.domain.employee.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
@@ -31,5 +32,12 @@ public class EmployeeController {
 
         JobHistoryResponse jobHistory = employeeService.getJobHistoryById(employeeId);
         return ResponseEntity.ok().body(jobHistory);
+    }
+
+    @GetMapping("/{employeeId}/department")
+    public ResponseEntity<DepartmentResponse> getDepartment(@PathVariable Long employeeId) {
+
+        DepartmentResponse department = employeeService.getDepartmentById(employeeId);
+        return ResponseEntity.ok().body(department);
     }
 }

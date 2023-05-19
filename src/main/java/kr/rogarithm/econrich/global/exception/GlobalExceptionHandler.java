@@ -1,5 +1,6 @@
 package kr.rogarithm.econrich.global.exception;
 
+import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(JobHistoryNotFoundException.class)
     protected ResponseEntity<Void> jobHistoryNotFoundException(JobHistoryNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(DepartmentNotFoundException.class)
+    protected ResponseEntity<Void> departmentNotFoundException(DepartmentNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }
