@@ -129,7 +129,7 @@ class EmployeeControllerTest {
 
     @Test
     public void getDepartmentAndLocationWithValidId() throws Exception {
-        Long id = 20L;
+        Long id = 201L;
         Department department = Department.builder()
                                           .id(20L)
                                           .departmentName("Marketing")
@@ -137,7 +137,7 @@ class EmployeeControllerTest {
                                           .locationId(1800L)
                                           .build();
         Location location = Location.builder()
-                                    .id(20L)
+                                    .id(1800L)
                                     .streetAddress("147 Spadina Ave")
                                     .postalCode("M5V 2L7")
                                     .city("Toronto")
