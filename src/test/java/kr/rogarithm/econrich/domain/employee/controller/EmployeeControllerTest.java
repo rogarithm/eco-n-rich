@@ -35,7 +35,7 @@ class EmployeeControllerTest {
     EmployeeService employeeService;
 
     @Test
-    public void getEmployyeWithInvalidId() throws Exception {
+    public void getEmployeeWithInvalidId() throws Exception {
         Long id = -1L;
 
         when(employeeService.getEmployeeById(id)).thenThrow(EmployeeNotFoundException.class);
