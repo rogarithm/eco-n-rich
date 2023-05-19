@@ -36,7 +36,6 @@ class EmployeeServiceTest {
 
     @Test
     public void validIdShouldGetEmployeeInfo() {
-
         // given
         Long id = 100L;
         Employee employee = Employee.builder()
@@ -64,7 +63,6 @@ class EmployeeServiceTest {
 
     @Test
     public void invalidIdShouldThrowEmployeeNotFoundException() {
-
         // given
         Long id = -1L;
 
@@ -79,7 +77,6 @@ class EmployeeServiceTest {
 
     @Test
     public void validIdShouldGetJobHistory() {
-
         // given
         Long id = 101L;
         JobHistory jobHistory = JobHistory.builder()
@@ -103,7 +100,6 @@ class EmployeeServiceTest {
 
     @Test
     public void invalidIdShouldThrowJobHistoryNotFoundException() {
-
         // given
         Long id = -1L;
 
@@ -118,7 +114,6 @@ class EmployeeServiceTest {
 
     @Test
     public void invalidIdShouldThrowDepartmentNotFoundException() {
-
         // given
         Long id = -1L;
 
@@ -134,7 +129,6 @@ class EmployeeServiceTest {
 
     @Test
     public void validIdShouldGetDepartmentAndLocation() {
-
         // given
         Long employeeId = 201L;
         Long departmentId = 20L;

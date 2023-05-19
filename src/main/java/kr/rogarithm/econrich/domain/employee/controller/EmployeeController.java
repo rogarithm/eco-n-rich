@@ -22,21 +22,18 @@ public class EmployeeController {
 
     @GetMapping("/{employeeId}")
     public ResponseEntity<EmployeeResponse> getEmployee(@PathVariable Long employeeId) {
-
         EmployeeResponse employeeResponse = employeeService.getEmployeeById(employeeId);
         return ResponseEntity.ok().body(employeeResponse);
     }
 
     @GetMapping("/{employeeId}/history")
     public ResponseEntity<JobHistoryResponse> getHistory(@PathVariable Long employeeId) {
-
         JobHistoryResponse jobHistory = employeeService.getJobHistoryById(employeeId);
         return ResponseEntity.ok().body(jobHistory);
     }
 
     @GetMapping("/{employeeId}/department")
     public ResponseEntity<DepartmentResponse> getDepartment(@PathVariable Long employeeId) {
-
         DepartmentResponse department = employeeService.getDepartmentById(employeeId);
         return ResponseEntity.ok().body(department);
     }
