@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import kr.rogarithm.econrich.domain.employee.domain.Department;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
+import kr.rogarithm.econrich.domain.employee.domain.Location;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,5 +56,19 @@ class EmployeeMapperTest {
         Department department = employeeMapper.selectDepartmentById(200L);
 
         assertEquals(10L, department.getId());
+    }
+
+    @Test
+    public void selectLocationByInvalidId() {
+        Location location = employeeMapper.selectLocationById(-1L);
+
+        assertEquals(null, location);
+    }
+
+    @Test
+    public void selectLocationByValidId() {
+        Location location = employeeMapper.selectLocationById(210L);
+
+        assertEquals(1700L, location.getId());
     }
 }
