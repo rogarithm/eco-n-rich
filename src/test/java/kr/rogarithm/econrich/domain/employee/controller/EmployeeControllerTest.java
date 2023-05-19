@@ -15,7 +15,6 @@ import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
 import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
 import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
-import kr.rogarithm.econrich.domain.historyInfo.service.HistoryInfoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ class EmployeeControllerTest {
 
     @MockBean
     EmployeeService employeeService;
-
-    @MockBean
-    HistoryInfoService historyInfoService;
 
     @Test
     public void getEmployyeWithInvalidId() throws Exception {
@@ -82,14 +78,14 @@ class EmployeeControllerTest {
     public void getJobHistoryWithInvalidId() throws Exception {
         Long id = -1L;
 
-        when(historyInfoService.getJobHistoryById(id)).thenThrow(JobHistoryNotFoundException.class);
+        when(employeeService.getJobHistoryById(id)).thenThrow(JobHistoryNotFoundException.class);
 
         this.mockMvc
                 .perform(get("/employees/{employeeId}/historyInfo", id))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
-        verify(historyInfoService).getJobHistoryById(id);
+        verify(employeeService).getJobHistoryById(id);
     }
 
     @Test
@@ -103,14 +99,14 @@ class EmployeeControllerTest {
                                           .departmentId(110L)
                                           .build();
 
-        when(historyInfoService.getJobHistoryById(id)).thenReturn(JobHistoryResponse.of(jobHistory));
+        when(employeeService.getJobHistoryById(id)).thenReturn(JobHistoryResponse.of(jobHistory));
 
         this.mockMvc
                 .perform(get("/employees/{employeeId}/historyInfo", id))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        verify(historyInfoService).getJobHistoryById(id);
+        verify(employeeService).getJobHistoryById(id);
     }
 
 }
