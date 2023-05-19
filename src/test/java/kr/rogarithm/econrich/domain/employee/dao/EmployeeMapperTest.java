@@ -2,6 +2,7 @@ package kr.rogarithm.econrich.domain.employee.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import kr.rogarithm.econrich.domain.employee.domain.Department;
 import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import org.junit.jupiter.api.Test;
@@ -40,5 +41,19 @@ class EmployeeMapperTest {
         JobHistory jobHistory = employeeMapper.selectJobHistoryById(102L);
 
         assertEquals(102L, jobHistory.getId());
+    }
+
+    @Test
+    public void selectDepartmentByInvalidId() {
+        Department department = employeeMapper.selectDepartmentById(-1L);
+
+        assertEquals(null, department);
+    }
+
+    @Test
+    public void selectDepartmentByValidId() {
+        Department department = employeeMapper.selectDepartmentById(20L);
+
+        assertEquals(20L, department.getId());
     }
 }
