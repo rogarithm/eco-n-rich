@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
+import kr.rogarithm.econrich.domain.employee.controller.EmployeeController;
+import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
 import kr.rogarithm.econrich.domain.historyInfo.domain.JobHistory;
 import kr.rogarithm.econrich.domain.historyInfo.dto.JobHistoryResponse;
 import kr.rogarithm.econrich.domain.historyInfo.exception.JobHistoryNotFoundException;
@@ -18,17 +20,20 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers = HistoryInfoController.class)
+@WebMvcTest(controllers = EmployeeController.class)
 class HistoryInfoControllerTest {
 
     @Autowired
     MockMvc mockMvc;
 
     @InjectMocks
-    HistoryInfoController historyInfoController;
+    EmployeeController employeeController;
 
     @MockBean
     HistoryInfoService historyInfoService;
+
+    @MockBean
+    EmployeeService employeeService;
 
     @Test
     public void getJobHistoryWithInvalidId() throws Exception {
@@ -37,7 +42,7 @@ class HistoryInfoControllerTest {
         when(historyInfoService.getJobHistoryById(id)).thenThrow(JobHistoryNotFoundException.class);
 
         this.mockMvc
-                .perform(get("/historyInfo/{employeeId}", id))
+                .perform(get("/employees/{employeeId}/historyInfo", id))
                 .andDo(print())
                 .andExpect(status().isNotFound());
 
@@ -58,7 +63,7 @@ class HistoryInfoControllerTest {
         when(historyInfoService.getJobHistoryById(id)).thenReturn(JobHistoryResponse.of(jobHistory));
 
         this.mockMvc
-                .perform(get("/historyInfo/{employeeId}", id))
+                .perform(get("/employees/{employeeId}/historyInfo", id))
                 .andDo(print())
                 .andExpect(status().isOk());
 

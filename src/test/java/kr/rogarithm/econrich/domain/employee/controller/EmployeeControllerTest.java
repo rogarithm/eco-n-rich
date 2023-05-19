@@ -12,6 +12,7 @@ import kr.rogarithm.econrich.domain.employee.domain.Employee;
 import kr.rogarithm.econrich.domain.employee.dto.EmployeeResponse;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import kr.rogarithm.econrich.domain.employee.service.EmployeeService;
+import kr.rogarithm.econrich.domain.historyInfo.service.HistoryInfoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ class EmployeeControllerTest {
 
     @MockBean
     EmployeeService employeeService;
+
+    @MockBean
+    HistoryInfoService historyInfoService;
 
     @Test
     public void getEmployyeWithInvalidId() throws Exception {
