@@ -1,7 +1,9 @@
 package kr.rogarithm.econrich.domain.department.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +17,24 @@ class DepartmentMapperTest {
 
     @Test
     public void selectJobHistoryByInvalidId() {
-        JobHistory jobHistory = departmentMapper.selectJobHistoryById(-1L);
+        List<JobHistory> jobHistories = departmentMapper.selectJobHistories(-1L);
 
-        assertEquals(null, jobHistory);
+        assertTrue(jobHistories.isEmpty());
     }
 
     @Test
     public void selectJobHistoryWithOneJobIdByValidId() {
-        JobHistory jobHistory = departmentMapper.selectJobHistoryById(60L);
+        List<JobHistory> jobHistories = departmentMapper.selectJobHistories(60L);
 
-        assertEquals(60L, jobHistory.getDepartmentId());
+        assertEquals(60L, jobHistories.get(0).getDepartmentId());
+    }
+
+    @Test
+    public void selectJobHistoryWithTwoJobIdByValidId() {
+        List<JobHistory> jobHistories = departmentMapper.selectJobHistories(110L);
+
+        for (JobHistory jobHistory : jobHistories) {
+            assertEquals(110L, jobHistory.getDepartmentId());
+        }
     }
 }
