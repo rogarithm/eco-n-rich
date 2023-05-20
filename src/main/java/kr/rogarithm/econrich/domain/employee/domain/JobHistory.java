@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class JobHistory {
 
-    private Long id;
+    private Long employeeId;
     private LocalDate startDate;
     private LocalDate endDate;
     private String jobId;
