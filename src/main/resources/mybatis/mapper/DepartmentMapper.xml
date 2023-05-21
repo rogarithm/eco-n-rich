@@ -13,4 +13,10 @@
     WHERE department_id = #{departmentId}
   </select>
 
+  <select id="updateEmployeeSalary" resultType="Integer">
+    UPDATE employees
+    SET salary = salary * #{raiseRate}
+    WHERE employee_id = #{employeeId};
+  </select>
+
 </mapper>
