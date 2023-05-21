@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import kr.rogarithm.econrich.domain.department.exception.InvalidRaiseRateException;
 import kr.rogarithm.econrich.domain.department.service.DepartmentService;
 import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 import org.junit.jupiter.api.Test;
@@ -57,6 +58,23 @@ class DepartmentControllerTest {
                         .param("raiseRate", raiseRate.toString()))
                 .andDo(print())
                 .andExpect(status().isNotFound());
+
+        verify(departmentService).raiseSalaryOfDepartment(id, raiseRate);
+    }
+
+    @Test
+    public void raiseRateOfInvalidRate() throws Exception {
+        Long id = 100L;
+        Double raiseRate = -1.1;
+
+        when(departmentService.raiseSalaryOfDepartment(id, raiseRate)).thenThrow(InvalidRaiseRateException.class);
+
+        this.mockMvc
+                .perform(put("/departments")
+                        .param("departmentId", id.toString())
+                        .param("raiseRate", raiseRate.toString()))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
 
         verify(departmentService).raiseSalaryOfDepartment(id, raiseRate);
     }

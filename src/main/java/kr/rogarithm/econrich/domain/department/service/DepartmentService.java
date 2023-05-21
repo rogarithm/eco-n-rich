@@ -2,6 +2,7 @@ package kr.rogarithm.econrich.domain.department.service;
 
 import java.util.List;
 import kr.rogarithm.econrich.domain.department.dao.DepartmentMapper;
+import kr.rogarithm.econrich.domain.department.exception.InvalidRaiseRateException;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 
@@ -14,6 +15,11 @@ public class DepartmentService {
     }
 
     public Integer raiseSalaryOfDepartment(Long departmentId, Double raiseRate) {
+
+        if (raiseRate < 0) {
+            throw new InvalidRaiseRateException("유효하지 않은 급여 인상률 " + raiseRate + "을 입력하셨습니다. 급여 인상률은 0보다 커야 합니다");
+        }
+
         List<JobHistory> jobHistories = departmentMapper.selectJobHistories(departmentId);
 
         if (jobHistories.isEmpty()) {
