@@ -26,6 +26,12 @@ public class DepartmentService {
             throw new DepartmentNotFoundException("입력한 부서 아이디 " + departmentId + "에 해당하는 부서를 찾을 수 없습니다");
         }
 
-        return 0;
+        Integer updatedRows = 0;
+        for (JobHistory jobHistory : jobHistories) {
+            Integer updated = departmentMapper.updateEmployeeSalary(jobHistory.getEmployeeId(), raiseRate);
+            updatedRows += updated;
+        }
+
+        return updatedRows;
     }
 }
