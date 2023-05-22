@@ -6,6 +6,7 @@ import kr.rogarithm.econrich.domain.department.exception.InvalidRaiseRateExcepti
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DepartmentService {
@@ -16,6 +17,7 @@ public class DepartmentService {
         this.departmentMapper = departmentMapper;
     }
 
+    @Transactional
     public Integer raiseSalaryOfDepartment(Long departmentId, Double raiseRate) {
 
         if (raiseRate < 0) {
