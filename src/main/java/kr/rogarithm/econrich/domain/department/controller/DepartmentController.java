@@ -1,5 +1,7 @@
 package kr.rogarithm.econrich.domain.department.controller;
 
+import java.util.List;
+import kr.rogarithm.econrich.domain.department.dto.RaiseDepartmentSalaryResponse;
 import kr.rogarithm.econrich.domain.department.service.DepartmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,10 +20,11 @@ public class DepartmentController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Void> raiseSalaryOfDepartment(
+    public ResponseEntity<List<RaiseDepartmentSalaryResponse>> raiseSalaryOfDepartment(
             @RequestParam Long departmentId,
             @RequestParam Double raiseRate) {
-        departmentService.raiseSalaryOfDepartment(departmentId, raiseRate);
-        return ResponseEntity.ok().build();
+        List<RaiseDepartmentSalaryResponse> responses = departmentService.raiseSalaryOfDepartment(departmentId,
+                raiseRate);
+        return ResponseEntity.ok().body(responses);
     }
 }
