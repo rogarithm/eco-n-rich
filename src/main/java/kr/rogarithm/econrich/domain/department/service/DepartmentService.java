@@ -5,7 +5,9 @@ import kr.rogarithm.econrich.domain.department.dao.DepartmentMapper;
 import kr.rogarithm.econrich.domain.department.exception.InvalidRaiseRateException;
 import kr.rogarithm.econrich.domain.employee.domain.JobHistory;
 import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DepartmentService {
 
     private final DepartmentMapper departmentMapper;
