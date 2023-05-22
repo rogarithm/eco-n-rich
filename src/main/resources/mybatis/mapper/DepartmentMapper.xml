@@ -13,10 +13,12 @@
     WHERE department_id = #{departmentId}
   </select>
 
-  <select id="updateEmployeeSalary" resultType="Integer">
+  <update id="updateEmployeeSalary">
     UPDATE employees
     SET salary = salary * #{raiseRate}
     WHERE employee_id = #{employeeId};
+  </update>
+
   <select id="selectEmployeeSalary" parameterType="Long" resultType="BigDecimal">
     SELECT salary
     FROM employees
