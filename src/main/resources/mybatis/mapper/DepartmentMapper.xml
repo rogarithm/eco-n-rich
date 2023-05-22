@@ -17,6 +17,10 @@
     UPDATE employees
     SET salary = salary * #{raiseRate}
     WHERE employee_id = #{employeeId};
+  <select id="selectEmployeeSalary" parameterType="Long" resultType="BigDecimal">
+    SELECT salary
+    FROM employees
+    WHERE employee_id = #{employeeId};
   </select>
 
 </mapper>
