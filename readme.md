@@ -3,15 +3,17 @@
 - Java, MySql, Spring Framework, AWS
 
 ### 구현 API 명세
-
 1. 특정 사원의 현재 정보 조회
+2. 특정 사원의 이력 정보 조회
+3. 부서 및 위치 정보 조회
+4. 특정 부서에 속한 사원의 급여를 특정 비율로 인상
 
-- API
-    - GET http://{HOST}:8080/employees/{employeeId}
-- 요청 예시
-    - http://localhost:8080/employees/100
-- 응답 예시
+#### 1. 특정 사원의 현재 정보 조회
 
+- `GET http://{HOST}:8080/employees/{employeeId}`
+- 예시
+  - 요청 `http://localhost:8080/employees/100`
+  - 응답
 ```json
   {
   "id": 100,
@@ -28,14 +30,12 @@
 }
 ```
 
-2. 특정 사원의 이력 정보 조회
+#### 2. 특정 사원의 이력 정보 조회
 
-- API
-    - GET http://{HOST}:8080/employees/{employeeId}/history
-- 요청 예시
-    - http://localhost:8080/employees/102/history
-- 응답 예시
-
+- `GET http://{HOST}:8080/employees/{employeeId}/history`
+- 예시
+  - 요청 `http://localhost:8080/employees/102/history`
+  - 응답
 ```json
 {
   "employeeId": 102,
@@ -46,14 +46,12 @@
 }
 ```
 
-3. 부서 및 위치 정보 조회
+#### 3. 부서 및 위치 정보 조회
 
-- API
-    - GET http://{HOST}:8080/employees/{employeeId}/department
-- 요청 예시
-    - http://localhost:8080/employees/200/department
-- 응답 예시
-
+- `GET http://{HOST}:8080/employees/{employeeId}/department`
+- 예시
+  - 요청 `http://localhost:8080/employees/200/department`
+  - 응답
 ```json
 {
   "id": 10,
@@ -68,14 +66,12 @@
 }
 ```
 
-4. 특정 부서에 속한 사원의 급여를 특정 비율로 인상
+#### 4. 특정 부서에 속한 사원의 급여를 특정 비율로 인상
 
-- API
-    - PUT http://{HOST}:8080/departments?departmentId={departmentId}&raiseRate={raiseRate}
-- 요청 예시 1
-    - http://localhost:8080/departments?departmentId=20&raiseRate=2.0
-- 응답 예시 1
-
+- `PUT http://{HOST}:8080/departments?departmentId={departmentId}&raiseRate={raiseRate}`
+- 예시 1
+  - 요청: `http://localhost:8080/departments?departmentId=20&raiseRate=2.0`
+  - 응답
 ```json
 [
   {
@@ -85,11 +81,9 @@
   }
 ]
 ```
-
-- 요청 예시 2
-    - http://localhost:8080/departments?departmentId=90&raiseRate=2.0
-- 응답 예시 2
-
+- 예시 2
+  - 요청: `http://localhost:8080/departments?departmentId=90&raiseRate=2.0`
+  - 응답
 ```json
 [
   {
