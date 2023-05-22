@@ -80,7 +80,7 @@ class EmployeeServiceTest {
         // given
         Long id = 101L;
         JobHistory jobHistory = JobHistory.builder()
-                                          .id(101L)
+                                          .employeeId(101L)
                                           .startDate(LocalDate.parse("1989-09-21"))
                                           .endDate(LocalDate.parse("1993-10-27"))
                                           .jobId("AC_ACCOUNT")
@@ -95,7 +95,7 @@ class EmployeeServiceTest {
         // then
         verify(employeeMapper).selectJobHistoryById(id);
         assertNotNull(jobHistoryResponse);
-        assertEquals(id, jobHistoryResponse.getId());
+        assertEquals(id, jobHistoryResponse.getEmployeeId());
     }
 
     @Test

@@ -37,4 +37,5 @@ public class EmployeeController {
         DepartmentResponse department = employeeService.getDepartmentById(employeeId);
         return ResponseEntity.ok().body(department);
     }
+
 }

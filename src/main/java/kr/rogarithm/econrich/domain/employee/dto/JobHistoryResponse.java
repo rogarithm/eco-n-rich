@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class JobHistoryResponse {
 
-    private Long id;
+    private Long employeeId;
     private LocalDate startDate;
     private LocalDate endDate;
     private String jobId;
@@ -17,7 +17,7 @@ public class JobHistoryResponse {
 
     public static JobHistoryResponse of(JobHistory jobHistory) {
         return JobHistoryResponse.builder()
-                                 .id(jobHistory.getId())
+                                 .employeeId(jobHistory.getEmployeeId())
                                  .startDate(jobHistory.getStartDate())
                                  .endDate(jobHistory.getEndDate())
                                  .jobId(jobHistory.getJobId())

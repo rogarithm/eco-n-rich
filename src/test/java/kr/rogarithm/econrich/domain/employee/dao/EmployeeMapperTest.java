@@ -41,7 +41,7 @@ class EmployeeMapperTest {
     public void selectJobHistoryByValidId() {
         JobHistory jobHistory = employeeMapper.selectJobHistoryById(102L);
 
-        assertEquals(102L, jobHistory.getId());
+        assertEquals(102L, jobHistory.getEmployeeId());
     }
 
     @Test

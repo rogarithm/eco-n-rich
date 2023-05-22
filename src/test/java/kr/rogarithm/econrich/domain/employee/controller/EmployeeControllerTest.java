@@ -96,7 +96,7 @@ class EmployeeControllerTest {
     public void getJobHistoryWithValidId() throws Exception {
         Long id = 101L;
         JobHistory jobHistory = JobHistory.builder()
-                                          .id(101L)
+                                          .employeeId(101L)
                                           .startDate(LocalDate.parse("1989-09-21"))
                                           .endDate(LocalDate.parse("1993-10-27"))
                                           .jobId("AC_ACCOUNT")

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.rogarithm.econrich.domain.department.dao.DepartmentMapper">
+
+  <select id="selectJobHistories" parameterType="Long"
+    resultType="kr.rogarithm.econrich.domain.employee.domain.JobHistory">
+    SELECT
+    employee_id, start_date, end_date, job_id, department_id
+    FROM job_history
+    WHERE department_id = #{departmentId}
+  </select>
+
+  <update id="updateEmployeeSalary">
+    UPDATE employees
+    SET salary = salary * #{raiseRate}
+    WHERE employee_id = #{employeeId};
+  </update>
+
+  <select id="selectEmployeeSalary" parameterType="Long" resultType="BigDecimal">
+    SELECT salary
+    FROM employees
+    WHERE employee_id = #{employeeId};
+  </select>
+
+</mapper>

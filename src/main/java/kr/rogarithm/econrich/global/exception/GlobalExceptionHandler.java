@@ -1,5 +1,6 @@
 package kr.rogarithm.econrich.global.exception;
 
+import kr.rogarithm.econrich.domain.department.exception.InvalidRaiseRateException;
 import kr.rogarithm.econrich.domain.employee.exception.DepartmentNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.EmployeeNotFoundException;
 import kr.rogarithm.econrich.domain.employee.exception.JobHistoryNotFoundException;
@@ -24,5 +25,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DepartmentNotFoundException.class)
     protected ResponseEntity<Void> departmentNotFoundException(DepartmentNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @ExceptionHandler(InvalidRaiseRateException.class)
+    protected ResponseEntity<Void> invalidRaiseRateException(InvalidRaiseRateException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
